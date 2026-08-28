@@ -1,0 +1,36 @@
+name: flyrank-capstone-widget-platform
+version: "1.0.0"
+language: python
+framework: fastapi
+
+run: uvicorn app.main:app --host 0.0.0.0 --port 8000
+seed: python3 seed.py
+test: pytest tests/test_probes.py -v
+
+base_url: http://localhost:8000
+
+endpoints:
+  health:
+    method: GET
+    path: /
+  widget_script:
+    method: GET
+    path: /widget.js
+  widget_config:
+    method: GET
+    path: /widgets/{widget_id}/config
+  public_submission:
+    method: POST
+    path: /submissions
+  widget_management:
+    method: GET
+    path: /widgets
+    auth_header: X-API-Key
+  dashboard_submissions:
+    method: GET
+    path: /dashboard/submissions
+    auth_header: X-API-Key
+  dashboard_stats:
+    method: GET
+    path: /dashboard/stats
+    auth_header: X-API-Key
